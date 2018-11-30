@@ -1,0 +1,80 @@
+{% extends 'base-nologout.html' %} {% block title %}Registration{% endblock %} {% block
+main_content %}
+<div class="container">
+  <div class="card-panel">
+    <h1 class="green-text accent-3 center">Account Information</h1>
+    <div class="divider"></div>
+    <form action="/register" method="POST" name="registration_form">
+      <div class="row">
+        <p>Account Details</p>
+        <div class="input-field col l4 m4 s12">
+          {{ form.username.label }} {{ form.username }}
+        </div>
+        <div class="input-field col l4 m4 s12">
+          {{ form.password.label }} {{ form.password }}
+        </div>
+        <div class="input-field col l4 m4 s12">
+          {{ form.verify_password.label }} {{ form.verify_password }}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row section">
+        <p>Personal Information</p>
+        <div class="input-field col l4 m4 s12">
+          {{ form.first_name.label }} {{ form.first_name }}
+        </div>
+        <div class="input-field col l4 m4 s12">
+          {{ form.middle_name.label }} {{ form.middle_name }}
+        </div>
+        <div class="input-field col l4 m4 s12">
+          {{ form.last_name.label }} {{ form.last_name }}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row section">
+        <p>School</p>
+        <div class="row">
+          <div class="col l9 m9 s12">
+            {{ form.school.label }} {{ form.school }}
+          </div>
+          <div class="col l3 m3 s12">
+            {{ form.date_graduated.label }} {{ form.date_graduated }}
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row section">
+        <p>Preffered Course</p>
+        <div class="row">
+          <div class="input-field col l4 m4 s12">
+              {{ form.first_priority }}
+          </div>
+          <div class="input-field col l4 m4 s12">
+            {{ form.second_priority }}
+          </div>
+          <div class="input-field col l4 m4 s12">
+            {{ form.third_priority }}
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row section center">
+          <button
+            class="btn waves-effect waves-light blue accent-3"
+            type="submit"
+            name="action"
+          >
+            Submit
+          </button>
+          <button
+            class="btn waves-effect waves-light grey darken-3"
+            type="submit"
+            name="action"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

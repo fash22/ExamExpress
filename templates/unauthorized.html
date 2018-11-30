@@ -1,0 +1,17 @@
+{% extends 'base-nologout.html' %}
+{% block title %}
+Login Required
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+<div class="card-panel">
+    <h1 class="red-text light">ERROR 401: Unauthorized Access</h1>
+    <p class="grey-text">You are not authorized to access this page. This is due to an attempt to access this page without logging in to your account.</p>
+    <div class="divider">
+    </div>
+    <p>In order to avoid this page, you can either create an account or login to your account if you have one.</p>
+    <a href="{{ url_for('login') }}" class="btn btn-large blue accent-3">Sign-in</a><a href="{{ url_for('login') }}" class="btn btn-large grey darken-3">Sign-up</a>
+</div>
+</div>
+{% endblock %}

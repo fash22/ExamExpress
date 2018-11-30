@@ -1,0 +1,346 @@
+{% extends 'base.html' %} {% block title %}Scratch Pad{% endblock %}
+{% block main_content %}
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs" id="exam_tabs">
+        <li class="tab col s3"><a href="#instr">General Instructions</a></li>
+        <li class="tab col s3"><a href="#eng">English</a></li>
+        <li class="tab col s3"><a href="#fil">Filipino</a></li>
+        <li class="tab col s3"><a href="#gen_info">Generial Information</a></li>
+        <li class="tab col s3"><a href="#math">Mathematics</a></li>
+        <li class="tab col s3"><a href="#sci">Science</a></li>
+        <li class="tab col s3"><a href="#sci">Reading Comprehension</a></li>
+      </ul>
+    </div>
+    <div id="instr"    class="col s12">
+      <div class="card-panel">
+        <div class="center">
+            <h1>General Instructions</h1>
+            <p><i>Online Entrance Exam</i></p>
+        </div>
+        <div class="divider"></div>
+        <p>INSTRUCTIONS</p>
+        <ol>
+            <li>This is a test to know how well you can solve different kinds of problem</li>
+            <li>You are to darken the circle provided in the separate answer sheet to identify your correct answer.</li>
+            <li>You are given one (1) hour to answer this test. If you finish the time ends, you can review</li>
+            <li>No other instructions be given after the start of the test.</li>
+        </ol>
+
+        <br><br>
+        <p>SUBJECT AREAS</p>
+        <p>The exam contains the following subject areas tabulated below:</p>
+        <table class="bordered">
+            <thead>
+                <tr>
+                    <th data-field="id">Subject Area</th>
+                    <th data-field="name">Value</th>
+                    <th data-field="price">Unit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>English</td>
+                    <td>30</td>
+                    <td>items</td>
+                </tr>
+                <tr>
+                    <td>Filipino</td>
+                    <td>15</td>
+                    <td>items</td>
+                </tr>
+                <tr>
+                    <td>General Information</td>
+                    <td>10</td>
+                    <td>items</td>
+                </tr>
+                <tr>
+                    <td>Mathematics</td>
+                    <td>30</td>
+                    <td>items</td>
+                </tr>
+                <tr>
+                    <td>Science</td>
+                    <td>15</td>
+                    <td>items</td>
+                </tr>
+            <tr>
+                <td><strong>TOTAL</strong></td>
+                <td>100</td>
+                <td>items</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="center">
+            <a href="#" class="btn btn-large blue accent-3" onclick="$('.tabs').tabs('select', 'eng');">START THE EXAM</a>
+        </div>
+    </div>
+  </div>
+    </div>
+    <div id="eng"      class="col s12">
+      <div class="row">
+    <div class="card-panel">
+      <div class="center section">
+        <h2 class="green-text">English Exam</h2>
+        <p class="grey-text"><em>Online Entrance Examination</em></p>
+        <p><strong>Bacolod City College</strong></p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          <strong>DIRECTION:</strong>Choose the letter pair of words that is
+          related in the same way as the pair in capital letters.
+        </p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <ol>
+          {% for q in q_eng %}
+          <div class="row">
+            <p><strong>{{ q.id }}.</strong>  {{ q.question }}</p>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_A}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_B}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_C}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_D}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+          </div>
+          {% endfor %}
+        </ol>
+      </div>
+        <div class="center">
+            <a href="#" class="btn btn-large blue accent-3" onclick="$('.tabs').tabs('select', 'fil');">NEXT &gt&gt</a>
+        </div>
+    </div>
+  </div>
+    </div>
+    <div id="fil"      class="col s12">
+      <div class="row">
+    <div class="card-panel">
+      <div class="center section">
+        <h2 class="green-text">Filipino Exam</h2>
+        <p class="grey-text"><em>Online Entrance Examination</em></p>
+        <p><strong>Bacolod City College</strong></p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          <strong>PANUTO: </strong>Punan ng tamang sagot ang patlang sa bawat pangungusap.
+        </p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <ol>
+          {% for q in q_fil %}
+          <div class="row">
+            <p><strong>{{ q.id }}.</strong>  {{ q.question }}</p>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_A}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_B}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_C}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_D}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+          </div>
+          {% endfor %}
+        </ol>
+      </div>
+    <div class="center">
+            <a href="#" class="btn btn-large blue accent-3" onclick="$('.tabs').tabs('select', 'gen_info');">NEXT &gt&gt</a>
+        </div>
+    </div>
+  </div>
+    </div>
+    <div id="gen_info" class="col s12">
+      <div class="row">
+    <div class="card-panel">
+      <div class="center section">
+        <h2 class="green-text">English Exam</h2>
+        <p class="grey-text"><em>Online Entrance Examination</em></p>
+        <p><strong>Bacolod City College</strong></p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          <strong>DIRECTION:</strong>Choose the letter pair of words that is
+          related in the same way as the pair in capital letters.
+        </p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <ol>
+          {% for q in questions %}
+          <div class="row">
+            <p><strong>{{ q.id }}.</strong>  {{ q.question }}</p>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_A}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_B}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_C}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_D}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+          </div>
+          {% endfor %}
+        </ol>
+      </div>
+    <div class="center">
+            <a href="#" class="btn btn-large blue accent-3" onclick="$('.tabs').tabs('select', 'math');">NEXT &gt&gt</a>
+        </div>
+    </div>
+  </div>
+    </div>
+    <div id="math"     class="col s12">
+      <div class="row">
+    <div class="card-panel">
+      <div class="center section">
+        <h2 class="green-text">English Exam</h2>
+        <p class="grey-text"><em>Online Entrance Examination</em></p>
+        <p><strong>Bacolod City College</strong></p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          <strong>DIRECTION:</strong>Choose the letter pair of words that is
+          related in the same way as the pair in capital letters.
+        </p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <ol>
+          {% for q in questions %}
+          <div class="row">
+            <p><strong>{{ q.id }}.</strong>  {{ q.question }}</p>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_A}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_B}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_C}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+            <div class="col l3 m3 s12">
+              <label>
+                <input type="radio" name="{{ q.id }}" />
+                <span>{{q.choice_D}}</span>
+              </label>
+              <br>
+              <br>
+            </div>
+          </div>
+          {% endfor %}
+        </ol>
+      </div>
+    <div class="center">
+            <a href="#" class="btn btn-large blue accent-3" onclick="$('.tabs').tabs('select', 'sci');">NEXT &gt&gt</a>
+        </div>
+    </div>
+  </div>
+    </div>
+    <div id=#sci"      class="col s12">
+      <div class="row">
+  </div>
+    </div>
+    <div id="#reading_comp"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javasscript %}
+    <script>
+
+    </script>
+{% endblock %}

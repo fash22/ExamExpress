@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>{% block title %}{% endblock %}</title>
+    <!-- Material Icon CDN -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Path of the materialize.min.css file -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize-grey-green.css') }}" media="screen,projection" />
+    <!-- Used as an example only to position the footer at the end of the page.
+      You can delete these styles or move it to your custom css file -->
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+      main {
+        flex: 1 0 auto;
+      }
+    </style>
+  </head>
+  <body style="background: rgb(117,117,117);">
+    <header>
+      <nav class="grey darken-3">
+        <div class="nav-wrapper">
+          <div class="container">
+            <a href="{{ url_for('home') }}" class="brand">Online Examination System</a>
+              <ul class="right">
+                  <li><a href="{{ url_for('logout') }}">Logout</a> </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+    {% block main_content %}{% endblock %}
+    </main>
+    <footer class="page-footer green accent-4">
+
+      <div class="footer-copyright">
+        <div class="container">
+          © 2018 Cofi.co Solutions
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
+    <!-- The jQuery file path -->
+      <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <!-- Path of the materialize.min.js file -->
+    <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script>
+      $("document").ready(function(){
+        $(".button-collapse").sideNav();
+      });
+      $(document).ready(function() {
+        $("select").formSelect();
+      });
+      $(document).ready(function () {
+          $('.tabs').tabs();
+      })
+    </script>
+    {% block javasscript %}
+    {% endblock %}
+  </body>
+</html>

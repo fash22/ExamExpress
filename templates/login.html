@@ -1,0 +1,47 @@
+{% extends 'base-nologout.html' %}
+{% block title %}Login{% endblock %}
+
+{% block main_content %}
+<div class="container">
+            <!-- <div id="ruler" class="row">
+                    <div class="green accent-3 col s1 m1 l1">1</div>
+                    <div class="green accent-3 col s1 m1 l1">2</div>
+                    <div class="green accent-3 col s1 m1 l1">3</div>
+                    <div class="green accent-3 col s1 m1 l1">4</div>
+                    <div class="green accent-3 col s1 m1 l1">5</div>
+                    <div class="green accent-3 col s1 m1 l1">6</div>
+                    <div class="green accent-3 col s1 m1 l1">7</div>
+                    <div class="green accent-3 col s1 m1 l1">8</div>
+                    <div class="green accent-3 col s1 m1 l1">9</div>
+                    <div class="green accent-3 col s1 m1 l1">10</div>
+                    <div class="green accent-3 col s1 m1 l1">11</div>
+                    <div class="green accent-3 col s1 m1 l1">12</div>
+            </div> -->
+            <div id="login-app" class="row">
+                <div class="col l4 m6 offset-l4 offset-m2">
+                    <div class="card-panel hoverable center">
+                        <h3 class="center green-text accent-3">Welcome</h3>
+                        {% if error %}<p class="red-text">{{ error }}</p> {% endif %}
+
+                        <p class="center grey-text">Please Login to continue</p>
+                        <form action="/login" method="POST">
+                            <div class="input-field">
+                                {{ form.username.label }}
+                                {{ form.username }}
+                            </div>
+
+                            <div class="input-field">
+                                {{ form.password.label }}
+                                {{ form.password }}
+                            </div>
+                            <div class="row">
+                                <button class="col l6 m6 s6 btn waves-effect waves-light blue accent-4" type="submit">Login
+                                </button>
+                                <a href="{{ url_for('register') }}" class="col l6 m6 s6 btn white green accent-4">Register</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

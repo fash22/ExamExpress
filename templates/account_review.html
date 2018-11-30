@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Account Review{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="card-panel">
+            <h1>Account Overview</h1>
+            <p class="grey-text">Online Examination System</p>
+            <p><strong>Bacolod City College</strong></p>
+            <div class="divider"></div>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th data-field="id">ID Number</th>
+                        <th data-field="name">Username</th>
+                        <th data-field="price">First Name</th>
+                        <th data-field="price">Middle Name</th>
+                        <th data-field="price">Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ examinee.id }}</td>
+                        <td>{{ examinee.username }}</td>
+                        <td>{{ examinee.first_name }}</td>
+                        <td>{{ examinee.middle_name }}</td>
+                        <td>{{ examinee.last_name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="divider"></div>
+            <p>If you are confident that the following information above is correct, you may now proceed to the examination proper.</p>
+            <a class="btn btn-large blue accent-3" href="{{ url_for('exam') }}">Proceed to EXAM</a><span></span><a class="btn btn-large green accent-3" href="#">Edit Account</a>
+        </div>
+    </div>
+{% endblock %}

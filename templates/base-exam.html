@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>{% block title %}{% endblock %}</title>
+    <!-- Material Icon CDN -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Path of the materialize.min.css file -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize-grey-green.css') }}" media="screen,projection" />
+    <!-- Used as an example only to position the footer at the end of the page.
+      You can delete these styles or move it to your custom css file -->
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+      main {
+        flex: 1 0 auto;
+      }
+    </style>
+  </head>
+  <body style="background: rgb(117,117,117);">
+    <header>
+      <div class="navbar-fixed">
+        <nav id="navbar" class="nav-extended">
+            <div class="nav-wrapper">
+                <div class="container">
+                    <a href="#" class="brand">Online Examination System</a>
+                    <a href="" class="sidenav-trigger" data-target="mobile-sidenav"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nav-content">
+                {% block navcontent %}
+                <p class="center" style="font-size: x-large">Time Remaining: <span id="hour">1</span>:<span id="min">59</span>:<span id="sec">59</span></span> </p>
+                {% endblock %}
+            </div>
+        </nav>
+    </div>
+    </header>
+    <main style="margin-top: 7rem;">
+    {% block main_content %}{% endblock %}
+    </main>
+    <footer class="page-footer green accent-4">
+
+      <div class="footer-copyright">
+        <div class="container">
+          © 2018 Cofi.co Solutions
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
+    <!-- The jQuery file path -->
+      <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <!-- Path of the materialize.min.js file -->
+    <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script>
+      $("document").ready(function(){
+        $(".button-collapse").sideNav();
+      });
+      $(document).ready(function() {
+        $("select").formSelect();
+      });
+      $(document).ready(function () {
+          $('.tabs').tabs();
+      })
+    </script>
+    {% block javasscript %}
+        <script>
+hours_remaining = 1;
+        minutes_remaining = 59;
+        seconds_remaining = 59;
+
+        let sidenav = document.querySelector('.sidenav');
+        sidenav_instance = M.Sidenav.init(sidenav);
+
+        function startTimer(){
+            if(seconds_remaining > 0) seconds_remaining--;
+            else {
+                seconds_remaining = 59;
+                if(minutes_remaining > 0) minutes_remaining--;
+                else {
+                    minutes_remaining = 59;
+                    if(hours_remaining > 0) hours_remaining--;
+                    else alert('times up!')
+                }
+            }
+
+
+
+            document.getElementById('sec').innerHTML = seconds_remaining;
+            document.getElementById('min').innerHTML = minutes_remaining;
+            document.getElementById('hour').innerHTML = hours_remaining;
+        }
+
+        </script>
+    {% endblock %}
+  </body>
+</html>

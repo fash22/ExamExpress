@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create an Account</title>
+    <!-- Material Icon CDN -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Path of the materialize.min.css file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}" media="screen,projection" />
+
+    <!--
+      Used as an example only to position the footer at the end of the page.
+      You can delete these styles or move it to your custom css file
+    -->
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+      main {
+        flex: 1 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="grey darken-4">
+        <div class="nav-wrapper">
+          <div class="container">
+            <a href="#" class="brand-logo">Online Exam System</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <div class="card-panel">
+          <h1 class="green-text accent-3 center">Account Information</h1>
+          <div class="divider"></div>
+          <form method="POST" name="registration_form">
+            <div class="row">
+              <p>Account Details</p>
+              <div class="input-field col l4 m4 s12">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" />
+              </div>
+              <div class="input-field col l4 m4 s12">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" />
+              </div>
+              <div class="input-field col l4 m4 s12">
+                <label for="vpassword">Verify Password</label>
+                <input type="password" name="vpassword" id="vpassword" />
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row section">
+              <p>Personal Information</p>
+              <div class="input-field col l4 m4 s12">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" id="firstname" />
+              </div>
+              <div class="input-field col l4 m4 s12">
+                <label for="middlename">Middle Name</label>
+                <input type="text" name="middlename" id="middlename" />
+              </div>
+              <div class="input-field col l4 m4 s12">
+                <label for="familyname">Family Name</label>
+                <input type="text" name="familyname" id="familyname" />
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row section">
+              <p>School</p>
+              <div class="row">
+                <div class="col l9 m9 s12">
+                  <label for="schoolname">School</label>
+                  <input type="text" name="schoolname" id="schoolname" />
+                </div>
+                <div class="col l3 m3 s12">
+                  <label for="year_graduated">Year Graduated</label>
+                  <input type="date" />
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row section">
+              <p>Preffered Course</p>
+              <div class="row">
+                <div class="input-field col l4 m4 s12">
+                  <small>First Priority</small>
+                  <select name="first_prio" id="first_prio">
+                    <option>BSBA</option>
+                    <option>BSEntrep</option>
+                    <option>BSOA</option>
+                    <option>BSIS/ACT</option>
+                    <option>BSIT</option>
+                    <option>BEED</option>
+                    <option>BSED</option>
+                  </select>
+                </div>
+                <div class="input-field col l4 m4 s12">
+                  <small>Second Priority</small>
+                  <select name="second_prio" id="second_prio">
+                    <option>BSBA</option>
+                    <option>BSEntrep</option>
+                    <option>BSOA</option>
+                    <option>BSIS/ACT</option>
+                    <option>BSIT</option>
+                    <option>BEED</option>
+                    <option>BSED</option>
+                  </select>
+                </div>
+                <div class="input-field col l4 m4 s12">
+                  <small>Third Priority</small>
+                  <select name="third_prio" id="third_prio">
+                    <option>BSBA</option>
+                    <option>BSEntrep</option>
+                    <option>BSOA</option>
+                    <option>BSIS/ACT</option>
+                    <option>BSIT</option>
+                    <option>BEED</option>
+                    <option>BSED</option>
+                  </select>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <div class="row section center">
+                <button class="btn waves-effect waves-light blue accent-3" type="submit" name="action">Submit</button>
+                <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action">Reset</button>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer class="page-footer green accent-4">
+      <div class="footer-copyright">
+        <div class="container">
+          © 2018 Cofi.co Solutions
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
+    <!-- The jQuery file path -->
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <!-- Path of the materialize.min.js file -->
+    <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script>
+      $(document).ready(function() {
+        $("select").formSelect();
+      });
+    </script>
+  </body>
+</html>
