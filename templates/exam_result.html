@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}
+Exam Results
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="card-panel">
+            <h1 class="green-text">Exam Results</h1>
+            <p>Below is the summary of your score for each subject.</p>
+            <hr>
+            <br>
+            <br>
+            <table class="bordered">
+                <thead>
+                    <tr>
+                        <th data-field="id">Subject</th>
+                        <th data-field="name">Number of Items</th>
+                        <th data-field="price">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>English</td>
+                        <td>30 Items</td>
+                        <td>{{ points['eng_points'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Filipino</td>
+                        <td>15 Items</td>
+                        <td>{{ points['fil_points'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>General Information</td>
+                        <td>15 Items</td>
+                        <td>{{ points['gen_points'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mathematics</td>
+                        <td>30 Items</td>
+                        <td>{{ points['mat_points'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Science</td>
+                        <td>15 Items</td>
+                        <td>{{ points['sci_points'] }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>TOTAL</b></td>
+                        <td><b>100 Items</b></td>
+                        <td><b>{{ points['total_points'] }}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

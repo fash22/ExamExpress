@@ -4,7 +4,7 @@ from flask import Flask, request, render_template, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import Form
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
-from wtforms import StringField, PasswordField, SelectField, SubmitField, validators
+from wtforms import StringField, PasswordField, SelectField, SubmitField, validators, RadioField
 from wtforms.fields.html5 import DateField
 
 
@@ -78,6 +78,9 @@ class RegistrationForm(LoginForm):
     second_priority = SelectField('Second Priority', choices=ch, validators=[validators.InputRequired()])
     third_priority = SelectField('Third Priority', choices=ch, validators=[validators.InputRequired()])
 
+class QustionForm(Form):
+    def __init__(self, question, c_a, c_b, c_c, c_d):
+        self.question = RadioField(question, choices=[c_a,c_b,c_c,c_d], validators=[validators.InputRequired()])
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -153,8 +156,56 @@ def exam():
     q_fil = ExamQuestion.query.filter_by(subject='FIL').all()
     q_gen = ExamQuestion.query.filter_by(subject='GEN').all()
     q_mat = ExamQuestion.query.filter_by(subject='MAT').all()
-    exam = {'eng':q_eng, 'fil':q_fil, 'gen':q_gen, 'mat':q_mat}
+    q_sci = ExamQuestion.query.filter_by(subject='SCI').all()
+    exam = {'eng':q_eng, 'fil':q_fil, 'gen':q_gen, 'mat':q_mat, 'sci':q_sci}
+
     return render_template('exams.html', exam=exam)
+
+
+@app.route('/exam/check', methods=['POST','GET'])
+@login_required
+def exam_check():
+    total_points = 0
+    eng_points = 0
+    fil_points = 0
+    gen_points = 0
+    mat_points = 0
+    sci_points = 0
+
+    # retrieve POST request data and convert it to list
+    answer_data = request.get_data(as_text=True).split('&')
+    answers = list()
+
+    # convert the answer_data list into a list of dictionary for convenience
+    for answer in answer_data:
+        item, val = answer.split('=')
+        answers.append({'item_number': item, 'ans': val})
+
+    # compare all the individual answer of the user to the correct answer stored in the database
+    for item in answers:
+        exam_question = ExamQuestion.query.filter(ExamQuestion.item_number == item['item_number']).all()[0]
+        if item['ans'] == exam_question.answer:
+            total_points = total_points + 1
+            if exam_question.item_number[0] == 'E':
+                eng_points = eng_points + 1
+            if exam_question.item_number[0] == 'F':
+                fil_points = fil_points + 1
+            if exam_question.item_number[0] == 'G':
+                gen_points = gen_points + 1
+            if exam_question.item_number[0] == 'M':
+                mat_points = mat_points + 1
+            if exam_question.item_number[0] == 'S':
+                sci_points = sci_points + 1
+    points = {
+        'eng_points': eng_points,
+        'fil_points': fil_points,
+        'gen_points': gen_points,
+        'mat_points': mat_points,
+        'sci_points': sci_points,
+        'total_points': total_points,
+    }
+
+    return render_template('exam_result.html', points=points)
 
 
 @app.route('/logout')

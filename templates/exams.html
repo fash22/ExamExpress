@@ -93,7 +93,8 @@ main_content %}
         </div>
       </div>
     </div>
-    <div id="eng" class="col s12">
+    <form action="/exam/check" method="post">
+        <div id="eng" class="col s12">
       <div class="card-panel">
         <ol>
           {% for q in exam['eng'] %}
@@ -102,7 +103,7 @@ main_content %}
             <div class="row">
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="A" />
                   <span>{{ q.choice_A }}</span>
                 </label>
                 <br />
@@ -110,7 +111,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="B" />
                   <span>{{ q.choice_B }}</span>
                 </label>
                 <br />
@@ -118,7 +119,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="C" />
                   <span>{{ q.choice_C }}</span>
                 </label>
                 <br />
@@ -126,7 +127,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="D" />
                   <span>{{ q.choice_D }}</span>
                 </label>
                 <br />
@@ -155,7 +156,7 @@ main_content %}
             <div class="row">
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="A" />
                   <span>{{ q.choice_A }}</span>
                 </label>
                 <br />
@@ -163,7 +164,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="B" />
                   <span>{{ q.choice_B }}</span>
                 </label>
                 <br />
@@ -171,7 +172,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="C" />
                   <span>{{ q.choice_C }}</span>
                 </label>
                 <br />
@@ -179,7 +180,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="D" />
                   <span>{{ q.choice_D }}</span>
                 </label>
                 <br />
@@ -208,7 +209,7 @@ main_content %}
             <div class="row">
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="A" />
                   <span>{{ q.choice_A }}</span>
                 </label>
                 <br />
@@ -216,7 +217,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="B" />
                   <span>{{ q.choice_B }}</span>
                 </label>
                 <br />
@@ -224,7 +225,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="C" />
                   <span>{{ q.choice_C }}</span>
                 </label>
                 <br />
@@ -232,7 +233,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="D" />
                   <span>{{ q.choice_D }}</span>
                 </label>
                 <br />
@@ -261,7 +262,7 @@ main_content %}
             <div class="row">
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="A" />
                   <span>{{ q.choice_A }}</span>
                 </label>
                 <br />
@@ -269,7 +270,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="B" />
                   <span>{{ q.choice_B }}</span>
                 </label>
                 <br />
@@ -277,7 +278,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="C" />
                   <span>{{ q.choice_C }}</span>
                 </label>
                 <br />
@@ -285,7 +286,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="D" />
                   <span>{{ q.choice_D }}</span>
                 </label>
                 <br />
@@ -308,13 +309,13 @@ main_content %}
     <div id="sci" class="col s12">
       <div class="card-panel">
         <ol>
-          {% for q in exam['fil'] %}
+          {% for q in exam['sci'] %}
           <li>
             {{ q.question }}
             <div class="row">
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="A" />
                   <span>{{ q.choice_A }}</span>
                 </label>
                 <br />
@@ -322,7 +323,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="B" />
                   <span>{{ q.choice_B }}</span>
                 </label>
                 <br />
@@ -330,7 +331,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="C" />
                   <span>{{ q.choice_C }}</span>
                 </label>
                 <br />
@@ -338,7 +339,7 @@ main_content %}
               </div>
               <div class="col l3 m3 s12">
                 <label>
-                  <input type="radio" name="{{ q.id }}" />
+                  <input type="radio" name="{{ q.item_number }}" id="{{ q.item_number }}" value="D" />
                   <span>{{ q.choice_D }}</span>
                 </label>
                 <br />
@@ -350,12 +351,19 @@ main_content %}
         </ol>
       </div>
       <div class="center">
-        <button class="btn btn-large waves-effect waves-light blue accent-3" type="submit" name="action">Submit to Server
+        <button class="btn btn-large waves-effect waves-light blue accent-3" type="submit">Submit to Server
         </button>
       </div>
     </div>
+    </form>
   </div>
 </div>
 
 {% for subject in exam %} {% for question in subject %}
 {{ question.question }} {% endfor %} {% endfor %} {% endblock %}
+
+{% block javasscript %}
+<script>
+
+</script>
+{% endblock %}
