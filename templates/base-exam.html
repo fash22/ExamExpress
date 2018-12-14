@@ -28,7 +28,7 @@
         <nav id="navbar" class="nav-extended">
             <div class="nav-wrapper">
                 <div class="container">
-                    <a href="#" class="brand">Online Examination System</a>
+                    <a href="#" class="brand">Online Exam System</a>
                     <a href="" class="sidenav-trigger" data-target="mobile-sidenav"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -72,31 +72,7 @@
     </script>
     {% block javasscript %}
         <script>
-hours_remaining = 1;
-        minutes_remaining = 59;
-        seconds_remaining = 59;
 
-        let sidenav = document.querySelector('.sidenav');
-        sidenav_instance = M.Sidenav.init(sidenav);
-
-        function startTimer(){
-            if(seconds_remaining > 0) seconds_remaining--;
-            else {
-                seconds_remaining = 59;
-                if(minutes_remaining > 0) minutes_remaining--;
-                else {
-                    minutes_remaining = 59;
-                    if(hours_remaining > 0) hours_remaining--;
-                    else alert('times up!')
-                }
-            }
-
-
-
-            document.getElementById('sec').innerHTML = seconds_remaining;
-            document.getElementById('min').innerHTML = minutes_remaining;
-            document.getElementById('hour').innerHTML = hours_remaining;
-        }
 
         </script>
     {% endblock %}

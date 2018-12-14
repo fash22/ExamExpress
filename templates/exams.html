@@ -364,6 +364,26 @@ main_content %}
 
 {% block javasscript %}
 <script>
+hours_remaining = 0;
+minutes_remaining = 0;
+seconds_remaining = 10;
 
+function startTimer(){
+  if(seconds_remaining > 0) seconds_remaining--;
+  else {
+      seconds_remaining = 59;
+      if(minutes_remaining > 0) minutes_remaining--;
+      else {
+          minutes_remaining = 59;
+          if(hours_remaining > 0) hours_remaining--;
+          document.getElementsByTagName('form')[0].submit();
+          
+      }
+  }
+
+  document.getElementById('sec').innerHTML = seconds_remaining;
+  document.getElementById('min').innerHTML = minutes_remaining;
+  document.getElementById('hour').innerHTML = hours_remaining;
+}
 </script>
 {% endblock %}

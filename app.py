@@ -96,17 +96,17 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
     # do stuff
-    return make_response(render_template('unauthorized.html'), 401)
+    return make_response(render_template('unauthorized.html', user=current_user), 401)
 
 @app.errorhandler(404)
 def not_found(error):
-    resp = make_response(render_template('error404.html'), 404)
+    resp = make_response(render_template('error404.html', user=current_user), 404)
     return resp
 
 
 @app.route('/')
 def home():
-    return render_template('welcome.html')
+    return render_template('welcome.html', user=current_user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -123,7 +123,7 @@ def login():
         except IndexError as err:
             return render_template('login.html', error='Account Not found', form=form)
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, user=current_user)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -148,13 +148,13 @@ def register():
         login_user(user)
         return render_template('account_review.html', examinee=current_user)
 
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, user=current_user)
 
 
 @app.route('/exam/general-instructions')
 @login_required
 def general_instructions():
-    return render_template('general_instructions.html')
+    return render_template('general_instructions.html', user=current_user)
 
 @app.route('/exam')
 @login_required
@@ -166,7 +166,7 @@ def exam():
     q_sci = ExamQuestion.query.filter_by(subject='SCI').all()
     exam = {'eng':q_eng, 'fil':q_fil, 'gen':q_gen, 'mat':q_mat, 'sci':q_sci}
 
-    return render_template('exams.html', exam=exam)
+    return render_template('exams.html', exam=exam, user=current_user)
 
 
 @app.route('/exam/check', methods=['POST','GET'])
@@ -230,7 +230,7 @@ def exam_check():
 @login_required
 def logout():
     logout_user()
-    return render_template('logout.html')
+    return render_template('logout.html', user=current_user)
 
 if __name__ == '__main__':
     app.run()
