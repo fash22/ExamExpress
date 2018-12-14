@@ -31,6 +31,13 @@ class Examinee(db.Model, UserMixin):
     school = db.Column(db.String(100), nullable=False)
     graduated = db.Column(db.Date(), nullable=False)
 
+    score_eng = db.Column(db.Integer)
+    score_fil = db.Column(db.Integer)
+    score_gen = db.Column(db.Integer)
+    score_mat = db.Column(db.Integer)
+    score_sci = db.Column(db.Integer)
+    score_total = db.Column(db.Integer)
+
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
@@ -205,7 +212,18 @@ def exam_check():
         'total_points': total_points,
     }
 
-    return render_template('exam_result.html', points=points)
+    current_user.score_eng = points['eng_points']
+    current_user.score_fil = points['fil_points']
+    current_user.score_gen = points['gen_points']
+    current_user.score_mat = points['mat_points']
+    current_user.score_sci = points['sci_points']
+    current_user.score_total = points['total_points']
+
+    print(current_user)
+    db.session.commit()
+
+
+    return render_template('exam_result.html', points=points, user=current_user)
 
 
 @app.route('/logout')

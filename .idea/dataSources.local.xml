@@ -4,5 +4,8 @@
     <data-source name="examinees" uuid="d9f43646-122a-490f-a7f9-85fed23e9507">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
     </data-source>
+    <data-source name="database" uuid="c070ed63-3071-4f43-93b8-6cc3858d21df">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
   </component>
 </project>
