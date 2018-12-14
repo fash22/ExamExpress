@@ -5,8 +5,28 @@
 <div class="row">
           <div class="container">
               <div class="card-panel white center">
-                  <p class="grey-text fs-24">Bacolod City College</p>
+                  <div class="row">
+                      <div class="col l2 m2 s12">
+                          <img class="responsive-img" src="{{ url_for('static', filename='img/logo.jpg') }}">
+                      </div>
+                      <div class="col l2 m2 s12">
+                          <img class="responsive-img" src="{{ url_for('static', filename='img/ba.jpg') }}">
+                      </div>
+                      <div class="col l2 m2 s12">
+                          <img class="responsive-img" src="{{ url_for('static', filename='img/ed.jpg') }}">
+                      </div>
+                      <div class="col l2 m2 s12">
+                          <img class="responsive-img" src="{{ url_for('static', filename='img/is.png') }}">
+                      </div>
+                      <div class="col l2 m2 s12">
+                          <img class="responsive-img" src="{{ url_for('static', filename='img/it.jpg') }}">
+                      </div>
+                      <div class="col l2 m2 s12">
+                          <img class="responsive-img" src="{{ url_for('static', filename='img/oa.jpg') }}">
+                      </div>
+                  </div>
                   <h1 class="green-text accent-3">Online Examination System</h1>
+                  <img class="responsive-img center-align" src="{{ url_for('static', filename='img/logo.jpg') }}">
                   <div class="divider"></div>
                   <p>Before taking the online exams, you must create an account first or login if you already have one</p>
                   <a href="{{ url_for('login') }}" class="waves-effect waves-light btn-large blue accent-4">Sign-in</a>
