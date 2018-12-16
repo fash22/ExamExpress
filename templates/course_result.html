@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+Course Result
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+    <div class="row">
+        <div class="card-panel">
+            <h1 class="green-text">Courses</h1>
+            <p>Below is the the list of courses that you may enroll in based on your exam results</p>
+            <hr>
+            <br>
+            <br>
+            <ul class="collection with-header">
+            {% for course in courses %}
+                {% if course == 'IT' %}
+                    <li class="collection-item avatar">
+                        <img src="{{ url_for('static', filename="img/it.jpg") }}" class="circle">
+                        <span class="title">BSIT</span>
+                        <p>BS Industrial Technology</p>
+                    </li>
+                {% endif %}
+                {% if course == 'IS' %}
+                    <li class="collection-item avatar">
+                        <img src="{{ url_for('static', filename="img/is.png") }}" class="circle">
+                        <span class="title">BSIS</span>
+                        <p>BS Information System</p>
+                    </li>
+                {% endif %}
+                {% if course == 'BA' %}
+                    <li class="collection-item avatar">
+                        <img src="{{ url_for('static', filename="img/ba.jpg") }}" class="circle">
+                        <span class="title">BSIS</span>
+                        <p>BS Business Administration</p>
+                    </li>
+                {% endif %}
+                {% if course == 'ED' %}
+                    <li class="collection-item avatar">
+                        <img src="{{ url_for('static', filename="img/ed.jpg") }}" class="circle">
+                        <span class="title">BEED</span>
+                        <p>BS Teacher Education</p>
+                    </li>
+                {% endif %}
+                {% if course == 'OA' %}
+                    <li class="collection-item avatar">
+                        <img src="{{ url_for('static', filename="img/oa.jpg") }}" class="circle">
+                        <span class="title">BSOA</span>
+                        <p>BS Office Administration</p>
+                    </li>
+                {% endif %}
+                {% if course == 'NONE' %}
+                    <li class="collection-item">
+                        <h3 class="red-text">None</h3>
+                        <p>Your score did not reach the minimum cutoff score of the school. Please dont be discourage, you may try and try again next time</p>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

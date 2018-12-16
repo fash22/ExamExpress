@@ -225,6 +225,25 @@ def exam_check():
 
     return render_template('exam_result.html', points=points, user=current_user)
 
+@app.route('/exam/result/course')
+@login_required
+def course_result():
+    courses = list()
+    if current_user.score_total >= 96 and current_user.score_total <= 100:
+        courses = ['IT','IS','BA','ED','OA']
+    elif current_user.score_total >= 91 and current_user.score_total <= 95:
+        courses = ['IS', 'BA', 'ED', 'OA']
+    elif current_user.score_total >= 86 and current_user.score_total <= 90:
+        courses = ['BA', 'ED', 'OA']
+    elif current_user.score_total >= 81 and current_user.score_total <= 85:
+        courses = ['ED', 'OA']
+    elif current_user.score_total >= 76 and current_user.score_total <= 80:
+        courses = ['OA']
+    else:
+        courses = ['NONE']
+
+    return render_template('course_result.html', courses=courses)
+
 
 @app.route('/logout')
 @login_required
