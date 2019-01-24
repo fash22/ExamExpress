@@ -1,0 +1,55 @@
+{% extends 'admin-base.html' %}
+{% block title %}Examr Admin List Base Template {% endblock %}
+
+
+{% block header_title %}Examinees{% endblock %}
+{% block header_description %}
+This is based on the admin-base template.
+{% endblock %}
+
+
+{% block app %}
+    <div class="card-panel">
+        <table class="responsive-table">
+    <thead>
+        <tr>
+            <th>ID Number</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>School</th>
+            <th>Total Written Exam Score</th>
+            <th>Enrollable Courses</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for examinee in examinees %}
+        <tr>
+            <td>{{ examinee.id }}</td>
+            <td>{{ examinee.last_name }}</td>
+            <td>{{ examinee.first_name }}</td>
+            <td>{{ examinee.middle_name }}</td>
+            <td>{{ examinee.school }}</td>
+            <td>{{ examinee.score_total }}</td>
+            {% if examinee.score_total >= 96 and examinee.score_total <= 100 %}
+                <td>BSIT, BSIS, BSBA, BEED, OA</td>
+            {% endif %}
+            {% if examinee.score_total >= 91 and examinee.score_total <= 95 %}
+                <td>BSIS, BSBA, BEED, OA</td>
+            {% endif %}
+            {% if examinee.score_total >= 86 and examinee.score_total <= 90 %}
+                <td>BSBA, BEED, OA</td>
+            {% endif %}
+            {% if examinee.score_total >= 81 and examinee.score_total <= 85 %}
+                <td>BEED, OA</td>
+            {% endif %}
+            {% if examinee.score_total >= 76 and examinee.score_total <= 80 %}
+                <td>OA</td>
+            {% endif %}
+
+        {% endfor %}
+    </tbody>
+</table>
+    </div>
+
+{% endblock %}

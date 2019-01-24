@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Examr Admin Base Template {% endblock %}</title>
+    <!-- Material Icon CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Path of the materialize.min.css file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize-grey-green.css') }}" media="screen,projection">
+    <!-- Custom css file path -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Used as an example only to position the footer at the end of the page.
+      You can delete these styles or move it to your custom css file -->
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            /*background: -webkit-linear-gradient(#2196f3, #69f0ae);*/
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .header-1 {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav id="navbar" class="nav-extended">
+            <div class="nav-wrapper">
+                <div class="container">
+                    <a href="#" class="brand-logo">Online Exam System</a>
+                    <a href="" class="sidenav-trigger" data-target="mobile-sidenav"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="{{ url_for('logout') }}" class="active">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+    </div>
+    <nav id="mobile-sidenav" class="sidenav">
+        <h1 class="center blue-text">Examr</h1>
+        <p class="center grey-text">Version 0.0.1</p>
+
+        <div class="divider"></div>
+        <ul>
+            <li><a href="#" class="active">Login</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <main style="background-color: #757575">
+        <div class="container">
+            <div class="row">
+                <div class="col l12 m12 s12">
+                <div class="card-panel">
+                    <header>
+                        <h1 class="green-text accent-4">{% block header_title %}Page Header{% endblock %}</h1>
+                        <p class="blue-grey-text">
+                            {% block header_description %}
+                            This is the <strong class="green-text accent-4">page_header</strong> block.
+                            It contains three more blocks for describing the page.
+                            <ul>
+                                <li>
+                                    Use <strong class="green-text accent-4">header_title</strong> to override this
+                                    page's
+                                    title.
+                                </li>
+                                <li>
+                                    Use <strong class="green-text accent-4">header_description</strong> to override
+                                    this page's
+                                    description.
+                                </li>
+                                <li>
+                                    Use <strong class="green-text accent-4">search_form</strong> if you wish to
+                                    override the search form.
+                                </li>
+                            </ul>
+                            {% endblock %}
+                        </p>
+                        {% block search_form %}
+                        <form method="post">
+                            <label for="qstring"><i>Search Examinee</i></label>
+                                <input type="search" name="qstring" id="qstring">
+                            <button type="submit" class="btn">Search</button>
+                        </form>
+                        {% endblock %}
+                    </header>
+                </div>
+
+                </div>
+                <div class="col l4 m4 s12">
+
+                </div>
+            </div>
+            <div class="row">
+                {% block app %}
+                <h2 class="green-text accent-2">App block</h2>
+                <p>This block is the <strong class="green-text accent-4">app</strong> block. it is contained inside a <code class="orange-text">.row</code> class. Feel free to override it</p>
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer green accent-4">
+        <div class="footer-copyright">
+            <div class="container">
+                © 2018 Cofi.co Solutions
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script>
+        var sidenav = document.querySelector('.sidenav');
+        sidenav_instance = M.Sidenav.init(sidenav);
+    </script>
+</body>
+
+</html>

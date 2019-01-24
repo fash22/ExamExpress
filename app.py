@@ -1,11 +1,12 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from flask import Flask, request, render_template, make_response
+from flask import Flask, request, render_template, make_response, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import Form
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from wtforms import StringField, PasswordField, SelectField, SubmitField, validators, RadioField
 from wtforms.fields.html5 import DateField
+from sqlalchemy import or_
 
 
 app = Flask(__name__)
@@ -51,6 +52,29 @@ class Examinee(db.Model, UserMixin):
 
     def __repr__(self):
         return '<Examinee>: %s %s' % (self.first_name, self.last_name)
+
+class Admin(db.Model, UserMixin):
+    __tablename__ = 'admins'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+    first_name = db.Column(db.String(20), nullable=False)
+    middle_name = db.Column(db.String(20), nullable=False)
+    last_name = db.Column(db.String(20), nullable=False)
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return '<Admin>: %s %s' % (self.first_name, self.last_name)
 
 class ExamQuestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -250,6 +274,35 @@ def course_result():
 def logout():
     logout_user()
     return render_template('logout.html', user=current_user)
+
+
+@app.route('/admin/login', methods=['POST', 'GET'])
+def admin_login():
+    form = LoginForm()
+    if request.method == 'POST':
+        try:
+            u = Admin.query.filter_by(username=form.username.data).all()[0]
+            if u.verify_password(form.password.data):
+                login_user(u)
+                examinees = Examinee.query.all()
+                return redirect('/admin')
+            else:
+                return render_template('login.html', error="Incorrect Password", form=form)
+        except IndexError as err:
+            return render_template('login.html', error='Account Not found', form=form)
+
+    return render_template('login.html', form=form, user=current_user)
+
+@app.route('/admin', methods=['GET', 'POST'])
+@login_required
+def admin():
+    examinees = Examinee.query.all()
+    if request.method == 'POST':
+        qstring = request.form['qstring']
+        examinees =  Examinee.query.filter(or_(Examinee.first_name.like(qstring), Examinee.last_name.like(qstring)))
+        render_template('examinees.html', examinees=examinees)
+
+    return render_template('examinees.html', examinees=examinees)
 
 if __name__ == '__main__':
     app.run()

@@ -24,7 +24,7 @@
                         {% if error %}<p class="red-text">{{ error }}</p> {% endif %}
 
                         <p class="center grey-text">Please Login to continue</p>
-                        <form action="/login" method="POST">
+                        <form method="POST">
                             <div class="input-field">
                                 {{ form.username.label }}
                                 {{ form.username }}
