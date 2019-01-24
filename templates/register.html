@@ -7,14 +7,17 @@ main_content %}
     <form action="/register" method="POST" name="registration_form">
       <div class="row">
         <p>Account Details</p>
-        <div class="input-field col l4 m4 s12">
+        <div class="input-field col l3 m3 s12">
           {{ form.username.label }} {{ form.username }}
         </div>
-        <div class="input-field col l4 m4 s12">
+        <div class="input-field col l3 m3 s12">
           {{ form.password.label }} {{ form.password }}
         </div>
-        <div class="input-field col l4 m4 s12">
+        <div class="input-field col l3 m3 s12">
           {{ form.verify_password.label }} {{ form.verify_password }}
+        </div>
+        <div class="input-field col l3 m3 s12">
+          {{ form.email.label }} {{ form.email }}
         </div>
       </div>
       <div class="divider"></div>
@@ -29,12 +32,34 @@ main_content %}
         <div class="input-field col l4 m4 s12">
           {{ form.last_name.label }} {{ form.last_name }}
         </div>
+        <div class="col l3 m3 s12">
+          {{ form.birth_date.label }} {{ form.birth_date }}
+        </div>
+        <div class="input-field col l3 m3 s12">
+          {{ form.age.label }} {{ form.age }}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row section">
+        <p>Contact Information</p>
+        <div class="input-field col l4 m4 s12">
+          {{ form.address.label }} {{ form.address }}
+        </div>
+        <div class="input-field col l4 m4 s12">
+          {{ form.city.label }} {{ form.city }}
+        </div>
+        <div class="input-field col l4 m4 s12">
+          {{ form.cel_number.label }} {{ form.cel_number }}
+        </div>
+        <div class="input-field col l12 m12 s12">
+          {{ form.guardian.label }} {{ form.guardian }}
+        </div>
       </div>
       <div class="divider"></div>
       <div class="row section">
         <p>School</p>
         <div class="row">
-          <div class="col l9 m9 s12">
+          <div class="input-field col l9 m9 s12">
             {{ form.school.label }} {{ form.school }}
           </div>
           <div class="col l3 m3 s12">

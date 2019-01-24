@@ -37,7 +37,7 @@
         <nav id="navbar" class="nav-extended">
             <div class="nav-wrapper">
                 <div class="container">
-                    <a href="#" class="brand-logo">Online Exam System</a>
+                    <a href="#" class="brand-logo">Entrance Exam System</a>
                     <a href="" class="sidenav-trigger" data-target="mobile-sidenav"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('logout') }}" class="active">Logout</a></li>
@@ -113,16 +113,12 @@
     <footer class="page-footer green accent-4">
         <div class="footer-copyright">
             <div class="container">
-                © 2018 Cofi.co Solutions
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                
             </div>
         </div>
     </footer>
     <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
-    <script>
-        var sidenav = document.querySelector('.sidenav');
-        sidenav_instance = M.Sidenav.init(sidenav);
-    </script>
+    <!-- <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script> -->
 </body>
 
 </html>

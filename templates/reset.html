@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Reset Succesful{% endblock %}
+{% block main_content %}
+    <div class="container">\
+        <div class="row">
+            <div class="card-panel">
+                <h1 class="green-text text-accent-3">Success</h1>
+                <div class="divider"></div>
+                <p>Examinee password was successfully reset.</p>
+                <a href="{{ url_for('admin') }}" class="btn-large blue accent-3">Back to admin</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

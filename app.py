@@ -4,7 +4,7 @@ from flask import Flask, request, render_template, make_response, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import Form
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
-from wtforms import StringField, PasswordField, SelectField, SubmitField, validators, RadioField
+from wtforms import StringField, PasswordField, SelectField, SubmitField, validators, RadioField, IntegerField
 from wtforms.fields.html5 import DateField
 from sqlalchemy import or_
 
@@ -31,6 +31,13 @@ class Examinee(db.Model, UserMixin):
     third_priority = db.Column(db.String(10), nullable=False)
     school = db.Column(db.String(100), nullable=False)
     graduated = db.Column(db.Date(), nullable=False)
+    address = db.Column(db.String(128))
+    birth_date = db.Column(db.Date)
+    age = db.Column(db.Integer)
+    city = db.Column(db.String(50))
+    cel_number = db.Column(db.String(15))
+    email = db.Column(db.String(25))
+    guardian = db.Column(db.String(128))
 
     score_eng = db.Column(db.Integer)
     score_fil = db.Column(db.Integer)
@@ -38,6 +45,8 @@ class Examinee(db.Model, UserMixin):
     score_mat = db.Column(db.Integer)
     score_sci = db.Column(db.Integer)
     score_total = db.Column(db.Integer)
+
+    exam_taken = db.Column(db.Boolean)
 
     @property
     def password(self):
@@ -103,6 +112,13 @@ class RegistrationForm(LoginForm):
     last_name = StringField('Last Name', validators=[validators.InputRequired()])
     school = StringField('Name of School', validators=[validators.InputRequired()])
     date_graduated = DateField('Date of Graduation')
+    address = StringField('Permanent Address', validators=[validators.InputRequired])
+    birth_date = DateField('Date of Birth', validators=[validators.InputRequired])
+    age = IntegerField('Age', validators=[validators.InputRequired, validators.Length(min=18, max=30)])
+    city = StringField('City', validators=[validators.InputRequired])
+    cel_number = StringField('Mobile Number', validators=[validators.InputRequired])
+    email = StringField('Email', validators=[validators.InputRequired])
+    guardian = StringField('Guardian', validators=[validators.InputRequired])
 
     ch = [('bsba','BSBA'), ('bsentrep', 'BSEntrep'), ('bsoa','BSOA'), ('bsisact','BSIS/ACT'), ('bsit','BSIT'), ('beed','BEED'), ('bsed','BSED')]
     first_priority = SelectField('First Priority', choices=ch, validators=[validators.InputRequired(),])
@@ -165,6 +181,15 @@ def register():
         user.first_priority = form.first_priority.data
         user.second_priority = form.second_priority.data
         user.third_priority = form.third_priority.data
+        user.exam_taken = False
+        user.address = form.address.data
+        user.birth_date = form.birth_date.data
+        user.age = form.age.data
+        user.guardian = form.guardian.data
+        user.city = form.city.data
+        user.cel_number = form.cel_number.data
+        user.email = form.email.data
+        user.score_total = 0
 
         db.session.add(user)
         db.session.commit()
@@ -183,6 +208,11 @@ def general_instructions():
 @app.route('/exam')
 @login_required
 def exam():
+
+    # check if current user already takes the exam.
+    if current_user.exam_taken == True:
+        return render_template('no_exam.html')
+
     q_eng = ExamQuestion.query.filter_by(subject='ENG').all()
     q_fil = ExamQuestion.query.filter_by(subject='FIL').all()
     q_gen = ExamQuestion.query.filter_by(subject='GEN').all()
@@ -202,6 +232,9 @@ def exam_check():
     gen_points = 0
     mat_points = 0
     sci_points = 0
+
+    # Mark the exam taker as taken
+    current_user.exam_taken = True
 
     # retrieve POST request data and convert it to list
     answer_data = request.get_data(as_text=True).split('&')
@@ -261,7 +294,7 @@ def course_result():
         courses = ['BA', 'ED', 'OA']
     elif current_user.score_total >= 81 and current_user.score_total <= 85:
         courses = ['ED', 'OA']
-    elif current_user.score_total >= 76 and current_user.score_total <= 80:
+    elif current_user.score_total >= 75 and current_user.score_total <= 80:
         courses = ['OA']
     else:
         courses = ['NONE']
@@ -303,6 +336,15 @@ def admin():
         render_template('examinees.html', examinees=examinees)
 
     return render_template('examinees.html', examinees=examinees)
+
+@app.route('/admin/reset-password')
+@login_required
+def password_reset():
+    user = request.args.get('user')
+    u = Examinee.query.filter_by(username=user).all()[0]
+    u.password = 'passwordreset'
+    db.session.commit()
+    return render_template('reset.html')
 
 if __name__ == '__main__':
     app.run()

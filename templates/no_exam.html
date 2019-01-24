@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Cannot Retake Exam{% endblock %}
+{% block main_content %}
+    <div class="container">\
+        <div class="row">
+            <div class="card-panel">
+                <h1 class="red-text text-accent-3">Sorry, You are not allowed to take again.</h1>
+                <div class="divider"></div>
+                <p>It seems you already have taken the exam.</p>
+                <a href="{{ url_for('logout') }}" class="btn-large blue accent-3">Logout</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
