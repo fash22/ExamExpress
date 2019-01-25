@@ -4,7 +4,7 @@ from flask import Flask, request, render_template, make_response, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import Form
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
-from wtforms import StringField, PasswordField, SelectField, SubmitField, validators, RadioField, IntegerField
+from wtforms import StringField, PasswordField, SelectField, SubmitField, validators, RadioField, IntegerField, BooleanField
 from wtforms.fields.html5 import DateField
 from sqlalchemy import or_
 
@@ -38,6 +38,8 @@ class Examinee(db.Model, UserMixin):
     cel_number = db.Column(db.String(15))
     email = db.Column(db.String(25))
     guardian = db.Column(db.String(128))
+    gender = db.Column(db.String)
+    
 
     score_eng = db.Column(db.Integer)
     score_fil = db.Column(db.Integer)
@@ -119,6 +121,8 @@ class RegistrationForm(LoginForm):
     cel_number = StringField('Mobile Number', validators=[validators.InputRequired])
     email = StringField('Email', validators=[validators.InputRequired])
     guardian = StringField('Guardian', validators=[validators.InputRequired])
+    gender = SelectField('Gender', choices=[('m', 'Male'), ('f', 'Female')], validators=[validators.InputRequired(),])
+    
 
     ch = [('bsba','BSBA'), ('bsentrep', 'BSEntrep'), ('bsoa','BSOA'), ('bsisact','BSIS/ACT'), ('bsit','BSIT'), ('beed','BEED'), ('bsed','BSED')]
     first_priority = SelectField('First Priority', choices=ch, validators=[validators.InputRequired(),])
@@ -181,7 +185,9 @@ def register():
         user.first_priority = form.first_priority.data
         user.second_priority = form.second_priority.data
         user.third_priority = form.third_priority.data
+
         user.exam_taken = False
+
         user.address = form.address.data
         user.birth_date = form.birth_date.data
         user.age = form.age.data
@@ -190,6 +196,7 @@ def register():
         user.cel_number = form.cel_number.data
         user.email = form.email.data
         user.score_total = 0
+        user.gender = form.gender.data
 
         db.session.add(user)
         db.session.commit()
